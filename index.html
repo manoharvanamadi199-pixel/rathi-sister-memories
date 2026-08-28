@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Raksha Bandhan, My Sister ❤️</title>
+
+<!--
+  ============================================================
+  FONTS: We use Google Fonts (free, no license fees, no signup).
+    - "Cormorant Garamond" -> elegant display serif for headings
+    - "Poppins"            -> clean body text
+    - "Caveat"             -> handwriting style for the letter
+  These are loaded from Google's free CDN, not a paid service.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ================= AMBIENT PARTICLE CANVAS ================= -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- ================= THE THREAD (signature scroll element) ================= -->
+<!-- This gold thread runs the length of the page like a Rakhi string,
+     with little charms that light up as your sister scrolls past each section. -->
+<div class="thread-track" aria-hidden="true">
+  <div class="thread-fill" id="threadFill"></div>
+  <div class="thread-charm" data-section="0">🪔</div>
+  <div class="thread-charm" data-section="1">📸</div>
+  <div class="thread-charm" data-section="2">❤️</div>
+  <div class="thread-charm" data-section="3">💌</div>
+  <div class="thread-charm" data-section="4">🌸</div>
+  <div class="thread-charm" data-section="5">🎮</div>
+  <div class="thread-charm" data-section="6">🎁</div>
+</div>
+
+<!-- ================= MUSIC PLAYER ================= -->
+<!--
+  EDIT HERE: replace assets/music/song.mp3 with your own song file.
+  Music never autoplays — it only starts when she presses play, per your request.
+-->
+<audio id="bg-music" loop preload="none">
+  <source src="assets/music/song.mp3" type="audio/mpeg" />
+</audio>
+<button id="music-toggle" class="music-toggle" aria-label="Play background music">
+  <span class="music-icon">🎵</span>
+  <span class="music-bars"><i></i><i></i><i></i></span>
+</button>
+
+<!-- ================= INTRO / WELCOME OVERLAY ================= -->
+<section id="intro" class="intro-screen">
+  <div class="intro-sparkle-field" aria-hidden="true"></div>
+  <div class="intro-content">
+    <p class="intro-line intro-line-1">Hey Sister</p>
+    <p class="intro-line intro-line-2">I Made Something Special For You...</p>
+    <p class="intro-line intro-line-3">Are You Ready For Your Surprise?</p>
+    <button id="startBtn" class="start-btn">
+      <span>START THE SURPRISE</span> <span class="gift-emoji">🎁</span>
+    </button>
+  </div>
+</section>
+
+<!-- ================= MAIN SITE (hidden until surprise starts) ================= -->
+<main id="mainSite" class="main-site">
+
+  <!-- ============ SECTION 1 — RAKSHA BANDHAN WISH ============ -->
+  <section id="section-wish" class="section wish-section" data-section-index="0">
+    <div class="floating-hearts" aria-hidden="true"></div>
+    <div class="reveal-block">
+      <span class="eyebrow">Raksha Bandhan</span>
+      <h1 class="wish-title">Happy Raksha Bandhan,<br>My Dear Sister!</h1>
+      <p class="wish-sub">
+        You are not just my sister — you are one of the most special people in my life.
+      </p>
+      <div class="rakhi-icon" aria-hidden="true">🧿</div>
+    </div>
+    <div class="scroll-hint">scroll down ↓</div>
+  </section>
+
+  <!-- ============ SECTION 2 — OUR MEMORIES (GALLERY) ============ -->
+  <section id="section-gallery" class="section gallery-section" data-section-index="1">
+    <span class="eyebrow">Frame by Frame</span>
+    <h2 class="section-title">Our Memories 📸</h2>
+    <p class="section-subtitle">Every picture is a little piece of us.</p>
+
+    <!--
+      EDIT HERE: Replace the placeholder images below with your real photos.
+      Just drop your photos into the "assets/photos" folder and rename them
+      to match, OR change the src="" paths to your own filenames.
+      You can also change the <p class="caption"> text under each photo.
+    -->
+    <div class="slideshow" id="slideshow">
+      <div class="slide active">
+        <img src="assets/photos/photo1.jpg" alt="Memory 1" onerror="this.src=window.PLACEHOLDER_IMG(1)">
+        <p class="caption">Replace me: caption for photo1.jpg</p>
+      </div>
+      <div class="slide">
+        <img src="assets/photos/photo2.jpg" alt="Memory 2" onerror="this.src=window.PLACEHOLDER_IMG(2)">
+        <p class="caption">Replace me: caption for photo2.jpg</p>
+      </div>
+      <div class="slide">
+        <img src="assets/photos/photo3.jpg" alt="Memory 3" onerror="this.src=window.PLACEHOLDER_IMG(3)">
+        <p class="caption">Replace me: caption for photo3.jpg</p>
+      </div>
+      <div class="slide">
+        <img src="assets/photos/photo4.jpg" alt="Memory 4" onerror="this.src=window.PLACEHOLDER_IMG(4)">
+        <p class="caption">Replace me: caption for photo4.jpg</p>
+      </div>
+      <div class="slide">
+        <img src="assets/photos/photo5.jpg" alt="Memory 5" onerror="this.src=window.PLACEHOLDER_IMG(5)">
+        <p class="caption">Replace me: caption for photo5.jpg</p>
+      </div>
+
+      <button class="slide-nav prev" id="prevSlide" aria-label="Previous photo">&#10094;</button>
+      <button class="slide-nav next" id="nextSlide" aria-label="Next photo">&#10095;</button>
+
+      <div class="slide-dots" id="slideDots"></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — OUR MEMORIES (STORY CARDS) ============ -->
+  <section id="section-stories" class="section stories-section" data-section-index="2">
+    <span class="eyebrow">Little Stories</span>
+    <h2 class="section-title">Memories We Made ❤️</h2>
+
+    <!--
+      EDIT HERE: Add / edit / remove as many memory cards as you like.
+      Just copy a ".memory-card" block and change the emoji, title and text.
+    -->
+    <div class="memory-grid">
+      <div class="memory-card">
+        <div class="memory-emoji">😂</div>
+        <h3>Remember all those silly fights?</h3>
+        <p>We fought over the smallest things, but somehow you were always there for me.</p>
+      </div>
+      <div class="memory-card">
+        <div class="memory-emoji">🚗</div>
+        <h3>That one ride we still laugh about</h3>
+        <p>[Edit: write a short memory here — a trip, a car ride, a random day that became unforgettable.]</p>
+      </div>
+      <div class="memory-card">
+        <div class="memory-emoji">🍫</div>
+        <h3>You always stole my share</h3>
+        <p>[Edit: the snack you two always fought over, and how you'd still split it in the end.]</p>
+      </div>
+      <div class="memory-card">
+        <div class="memory-emoji">📚</div>
+        <h3>Late night talks that fixed everything</h3>
+        <p>[Edit: a time you two talked late at night about something that mattered.]</p>
+      </div>
+      <div class="memory-card">
+        <div class="memory-emoji">🎂</div>
+        <h3>Every birthday, without fail</h3>
+        <p>[Edit: how you two celebrate birthdays or festivals together, year after year.]</p>
+      </div>
+      <div class="memory-card">
+        <div class="memory-emoji">🤝</div>
+        <h3>You always had my back</h3>
+        <p>[Edit: a moment your sister stood up for you or supported you.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 — A MESSAGE FROM YOUR BROTHER ============ -->
+  <section id="section-letter" class="section letter-section" data-section-index="3">
+    <span class="eyebrow">From My Heart</span>
+    <h2 class="section-title">A Message From Your Brother 💌</h2>
+
+    <div class="letter-wrap">
+      <div class="letter-paper">
+        <div class="letter-seal">🧿</div>
+        <!--
+          EDIT HERE: This is your handwritten-style letter.
+          Feel free to rewrite it completely in your own words —
+          just keep it inside the <p class="letter-text"> tags,
+          and use <br><br> to start a new paragraph.
+        -->
+        <p class="letter-text">
+          Dear Sister,<br><br>
+          We may fight, tease each other and annoy each other all the time, but I want you to know that you are very special to me.<br><br>
+          No matter how much we grow up or how far life takes us, you will always be my sister and I will always be there for you.<br><br>
+          Happy Raksha Bandhan! ❤️<br><br>
+          With lots of love,<br>
+          Your Brother
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5 — WHY YOU ARE SPECIAL ============ -->
+  <section id="section-special" class="section special-section" data-section-index="4">
+    <span class="eyebrow">The Reasons</span>
+    <h2 class="section-title">Why You Are Special 🌸</h2>
+
+    <!-- EDIT HERE: add/remove reason cards freely -->
+    <div class="special-grid">
+      <div class="special-card"><div class="special-emoji">😊</div><p>You always make me smile</p></div>
+      <div class="special-card"><div class="special-emoji">😎</div><p>You are my partner in crime</p></div>
+      <div class="special-card"><div class="special-emoji">❤️</div><p>You understand me</p></div>
+      <div class="special-card"><div class="special-emoji">🥰</div><p>You make our family happier</p></div>
+      <div class="special-card"><div class="special-emoji">🤗</div><p>You are always there when I need you</p></div>
+      <div class="special-card"><div class="special-emoji">😂</div><p>Even our fights become funny memories</p></div>
+      <div class="special-card"><div class="special-emoji">🌟</div><p>You believe in me more than I do</p></div>
+      <div class="special-card"><div class="special-emoji">🏡</div><p>Home always feels warmer with you around</p></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6 — MINI QUIZ GAME ============ -->
+  <section id="section-quiz" class="section quiz-section" data-section-index="5">
+    <span class="eyebrow">Just For Fun</span>
+    <h2 class="section-title">How Well Do You Know Your Brother? 🎮</h2>
+
+    <div class="quiz-box" id="quizBox">
+      <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+
+      <!--
+        EDIT HERE: Change questions, options, and mark the correct one
+        by giving it the class "correct". You can add more <div class="quiz-question">
+        blocks the same way — just update data-q="" numbers in order.
+      -->
+      <div class="quiz-question active" data-q="0">
+        <h3>1. What is my favorite food?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option correct">[Edit: your real favorite]</button>
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-q="1">
+        <h3>2. What did I want to become when I was little?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+          <button class="quiz-option correct">[Edit: your real answer]</button>
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-q="2">
+        <h3>3. Who usually starts our fights? 😅</h3>
+        <div class="quiz-options">
+          <button class="quiz-option">Me, obviously</button>
+          <button class="quiz-option correct">Her, obviously 😏</button>
+          <button class="quiz-option">We honestly don't know anymore</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-q="3">
+        <h3>4. What's my most used excuse to borrow money from you?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option correct">[Edit: your real excuse 😂]</button>
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+          <button class="quiz-option">[Edit: funny wrong answer]</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-q="4">
+        <h3>5. On a scale of 1–10, how much do I actually love you?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option">A solid 7</button>
+          <button class="quiz-option">Somewhere around 9</button>
+          <button class="quiz-option correct">Infinity, always has been ❤️</button>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quizResult">
+        <div class="quiz-result-emoji" id="quizResultEmoji">🏆</div>
+        <h3 id="quizResultTitle">You know me so well!</h3>
+        <p id="quizResultText">Doesn't matter what the score says — you know my heart better than anyone. That's what actually counts.</p>
+        <button class="quiz-restart" id="quizRestart">Play Again 🔁</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 7 — FINAL SURPRISE (GIFT BOX) ============ -->
+  <section id="section-final" class="section final-section" data-section-index="6">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="final-pre" id="finalPre">
+      <span class="eyebrow">Almost There</span>
+      <h2 class="section-title">One Last Surprise... 🎁</h2>
+      <p class="section-subtitle">Go on, open it.</p>
+
+      <button id="giftBox" class="gift-box" aria-label="Open your gift">
+        <div class="gift-box-lid"></div>
+        <div class="gift-box-base"></div>
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-glow"></div>
+      </button>
+      <p class="tap-hint">tap the gift box</p>
+    </div>
+
+    <div class="final-reveal" id="finalReveal">
+      <div class="reveal-inner">
+        <p class="final-line">Whatever happens in life,</p>
+        <p class="final-line">I'll always be your brother,</p>
+        <p class="final-line">and you'll always be my sister. <span class="heart-pop">❤️</span></p>
+        <h2 class="final-headline">Happy Raksha Bandhan! 🧿❤️</h2>
+        <!-- EDIT HERE: add your name if you'd like a signature line -->
+        <p class="final-signature">— Your Brother</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Made with ❤️ for my sister, this Raksha Bandhan.</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

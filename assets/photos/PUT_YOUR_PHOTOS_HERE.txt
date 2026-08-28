@@ -1,0 +1,12 @@
+Put your real photos in this folder, named exactly:
+photo1.jpg
+photo2.jpg
+photo3.jpg
+photo4.jpg
+photo5.jpg
+
+(You can use .png or .jpeg too — just update the "src" paths in index.html
+to match, inside the "Section 2 — Our Memories" part.)
+
+Until you add real photos, the website will automatically show a soft
+placeholder image instead, so nothing looks broken.

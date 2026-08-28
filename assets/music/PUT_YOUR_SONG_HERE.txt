@@ -1,0 +1,5 @@
+Put your background music file in this folder, named exactly:
+song.mp3
+
+Until you add it, the music button will still appear and can be clicked,
+but nothing will play (this is normal — just add your mp3 here).
